@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const folderCards = document.querySelectorAll('.folder-card');
     const filterButtons = document.querySelectorAll('.filter-btn');
     const portfolioCards = document.querySelectorAll('.portfolio-card');
+    const isMobile = window.innerWidth < 1024;
 
-    // Use a flag to prevent rapid redundant calls
     let isTransitioning = false;
 
     window.showFolderContents = (category) => {
@@ -27,11 +27,15 @@ document.addEventListener('DOMContentLoaded', () => {
         portfolioCards.forEach((card) => {
             if (category === 'all' || card.getAttribute('data-category') === category) {
                 card.style.display = 'block';
-                card.style.animation = 'none';
-                // Use setTimeout to avoid frame drops on reflow
-                setTimeout(() => {
-                    card.style.animation = `fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards ${visibleIndex * 0.05}s`;
-                }, 10);
+                if (isMobile) {
+                    card.style.animation = 'none';
+                    card.style.opacity = '1';
+                } else {
+                    card.style.animation = 'none';
+                    setTimeout(() => {
+                        card.style.animation = `fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards ${visibleIndex * 0.05}s`;
+                    }, 10);
+                }
                 visibleIndex++;
             } else {
                 card.style.display = 'none';
@@ -40,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const portfolioSection = document.getElementById('portfolio');
         if (portfolioSection) {
-            portfolioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            portfolioSection.scrollIntoView({ behavior: 'auto', block: 'start' });
         }
 
         setTimeout(() => { isTransitioning = false; }, 300);
@@ -57,12 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
         filterButtons.forEach(btn => btn.classList.remove('active'));
         if (filterButtons[0]) filterButtons[0].classList.add('active');
 
-        folderCards.forEach((folder, index) => {
-            folder.style.animation = 'none';
-            setTimeout(() => {
-                folder.style.animation = `folderEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards ${index * 0.05}s`;
-            }, 10);
-        });
+        if (!isMobile) {
+            folderCards.forEach((folder, index) => {
+                folder.style.animation = 'none';
+                setTimeout(() => {
+                    folder.style.animation = `folderEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards ${index * 0.05}s`;
+                }, 10);
+            });
+        }
 
         setTimeout(() => { isTransitioning = false; }, 300);
     };
@@ -70,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
     folderCards.forEach(folder => {
         folder.addEventListener('click', () => {
             const category = folder.getAttribute('data-category');
-            if (typeof playSound === 'function') playSound('click');
             window.showFolderContents(category);
         });
     });
@@ -85,7 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (backToFoldersBtn) {
         backToFoldersBtn.addEventListener('click', () => {
-            if (typeof playSound === 'function') playSound('click');
             window.showFolders();
         });
     }

@@ -53,19 +53,32 @@
         </div>
     </div>
 
+    <script>
+        // High Performance check
+        const isLowEnd = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 1024;
+        if (isLowEnd) {
+            document.documentElement.classList.add('low-end');
+            // Immediate preloader cleanup
+            window.addEventListener('DOMContentLoaded', () => {
+                const p = document.querySelector('.preloader');
+                if (p) setTimeout(() => p.style.display = 'none', 800);
+                // Remove heavy nodes to free RAM on the A30s
+                document.querySelectorAll('.mobile-hide').forEach(el => el.remove());
+            });
+        }
+    </script>
     <!-- Custom Cursor -->
-    <div class="custom-cursor"></div>
-    <div class="custom-cursor-dot"></div>
+    <div class="custom-cursor mobile-hide"></div>
 
-    <!-- Background Cosmic Atmosphere -->
-    <div class="star-field"></div>
-    <div class="nebula-container">
+    <!-- Background Cosmic Atmosphere - LIGHT VERSION FOR MOBILE -->
+    <div class="star-field mobile-hide"></div>
+    <div class="nebula-container mobile-hide">
         <div class="nebula blue"></div>
         <div class="nebula purple"></div>
         <div class="nebula green"></div>
     </div>
-    <div class="planet-container"></div>
-    <div class="ufo-container"></div>
+    <div class="planet-container mobile-hide"></div>
+    <div class="ufo-container mobile-hide"></div>
 
     <!-- Background Animated Glows -->
     <div class="bg-glow-1"></div>
@@ -102,10 +115,10 @@
                         <div class="live-dot"></div>
                     </div>
                     <div class="ig-carousel">
-                        <img src="assets/ig1.png" alt="IG 1">
-                        <img src="assets/ig2.png" alt="IG 2">
-                        <img src="assets/ig3.png" alt="IG 3">
-                        <img src="assets/ig4.png" alt="IG 1">
+                        <img src="assets/ig1.png" alt="IG 1" loading="lazy">
+                        <img src="assets/ig2.png" alt="IG 2" loading="lazy">
+                        <img src="assets/ig3.png" alt="IG 3" loading="lazy">
+                        <img src="assets/ig4.png" alt="IG 1" loading="lazy">
                     </div>
                     <div class="ig-preview-footer">VER PERFIL <i class="ri-external-link-line"></i></div>
                 </div>
@@ -276,38 +289,38 @@
                 <!-- Project 1 -->
                 <div class="portfolio-card large reveal stagger-1" data-category="branding">
                     <span class="tag">MARCA</span>
-                    <img src="assets/portfolio_brand.png" alt="Proyecto de Branding" class="port-img">
+                    <img src="assets/portfolio_brand.png" alt="Proyecto de Branding" class="port-img" loading="lazy">
                 </div>
                 <!-- Project 2 -->
                 <div class="portfolio-card tall reveal stagger-2" data-category="ilustraciones">
                     <span class="tag">ILUSTRACIÓN</span>
-                    <img src="assets/portfolio_print.png" alt="Proyecto de Ilustración" class="port-img">
+                    <img src="assets/portfolio_print.png" alt="Proyecto de Ilustración" class="port-img" loading="lazy">
                 </div>
                 <!-- Project 3 -->
                 <div class="portfolio-card reveal stagger-3" data-category="logos">
                     <span class="tag">LOGO</span>
-                    <img src="assets/portfolio_ui.png" alt="Proyecto de Logo" class="port-img">
+                    <img src="assets/portfolio_ui.png" alt="Proyecto de Logo" class="port-img" loading="lazy">
                 </div>
                 <!-- Project 4 -->
                 <div class="portfolio-card reveal stagger-4" data-category="social">
                     <span class="tag">SOCIAL MEDIA</span>
-                    <img src="assets/portfolio_web.png" alt="Proyecto Social Media" class="port-img">
+                    <img src="assets/portfolio_web.png" alt="Proyecto Social Media" class="port-img" loading="lazy">
                 </div>
                 <!-- Project 5 -->
                 <div class="portfolio-card long reveal stagger-1" data-category="social">
                     <span class="tag">REEL</span>
                     <div class="play-icon"><i class="ri-play-fill"></i></div>
-                    <img src="assets/portfolio_motion.png" alt="Proyecto Video" class="port-img">
+                    <img src="assets/portfolio_motion.png" alt="Proyecto Video" class="port-img" loading="lazy">
                 </div>
                 <!-- Project 6 -->
                 <div class="portfolio-card reveal stagger-2" data-category="ilustraciones">
                     <span class="tag">DISEÑO</span>
-                    <img src="assets/portfolio_3d.png" alt="Proyecto de Diseño" class="port-img">
+                    <img src="assets/portfolio_3d.png" alt="Proyecto de Diseño" class="port-img" loading="lazy">
                 </div>
                 <!-- Project 7: IA -->
                 <div class="portfolio-card large reveal stagger-3" data-category="ia">
                     <span class="tag">IA DESIGN</span>
-                    <img src="assets/portfolio_ia.png" alt="Proyecto IA" class="port-img">
+                    <img src="assets/portfolio_ia.png" alt="Proyecto IA" class="port-img" loading="lazy">
                 </div>
             </div>
         </section>
@@ -684,6 +697,13 @@
         </div>
     </div>
 
+    <script>
+        // Emergency kill preloader
+        setTimeout(() => {
+            const p = document.querySelector('.preloader');
+            if (p) p.style.display = 'none';
+        }, 1500);
+    </script>
     <script src="script.js"></script>
     <script src="folders.js"></script>
     <script src="upgrades.js"></script>
