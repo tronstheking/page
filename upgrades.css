@@ -1,0 +1,382 @@
+/* UPGRADES CSS - MISSION PACK */
+
+/* 1. MISSION COUNTERS */
+.mission-counters {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid rgba(0, 224, 116, 0.1);
+    border-bottom: 1px solid rgba(0, 224, 116, 0.1);
+    margin: 40px 0;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.counter-item {
+    text-align: center;
+    min-width: 100px;
+}
+
+.counter-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--primary-green);
+    font-family: var(--font-heading);
+    text-shadow: 0 0 15px rgba(0, 224, 116, 0.5);
+}
+
+.counter-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-gray);
+    margin-top: 5px;
+    font-weight: 700;
+}
+
+/* 2. MISSION PATH (PROCESS) */
+.mission-path-section {
+    padding: 80px 20px;
+    position: relative;
+}
+
+.path-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* The Connecting Line with Glow */
+.path-container::before {
+    content: '';
+    position: absolute;
+    left: 25px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom,
+            transparent,
+            var(--primary-green),
+            var(--primary-green),
+            transparent);
+    opacity: 0.5;
+    box-shadow: 0 0 15px var(--primary-green);
+    animation: lineGlow 3s ease-in-out infinite;
+}
+
+@keyframes lineGlow {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        filter: blur(1px);
+    }
+
+    50% {
+        opacity: 0.8;
+        filter: blur(0px);
+    }
+}
+
+.path-step {
+    display: flex;
+    gap: 30px;
+    position: relative;
+    z-index: 1;
+    background: rgba(5, 10, 16, 0.6);
+    /* Fondo oscuro semi-transparente */
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    /* Desenfoque de fondo */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    /* Borde sutil */
+    transition: all 0.4s ease;
+}
+
+.path-step:hover {
+    background: rgba(5, 10, 16, 0.8);
+    border-color: rgba(0, 224, 116, 0.2);
+    transform: translateX(10px) !important;
+}
+
+.step-icon-box {
+    width: 60px;
+    height: 60px;
+    background: #000;
+    border: 2px solid var(--primary-green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--primary-green);
+    box-shadow: 0 0 20px rgba(0, 224, 116, 0.4);
+    flex-shrink: 0;
+    position: relative;
+    animation: iconPulse 2s infinite alternate;
+}
+
+@keyframes iconPulse {
+    from {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(0, 224, 116, 0.4);
+    }
+
+    to {
+        transform: scale(1.1);
+        box-shadow: 0 0 25px rgba(0, 224, 116, 0.7);
+    }
+}
+
+.step-icon-box::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid var(--primary-green);
+    animation: ripple 2s linear infinite;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+.step-content h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.step-content p {
+    color: #e0e0e0;
+    /* Texto mas blanco para lectura */
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    /* Sombra para resaltar */
+}
+
+/* 3. TESTIMONIALS (Radio Transmissions) */
+.testimonials-section {
+    padding: 60px 20px;
+    overflow: hidden;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.testimonial-card {
+    background: rgba(5, 10, 16, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 20px;
+    position: relative;
+    transition: all 0.4s;
+}
+
+.testimonial-card:hover {
+    border-color: var(--primary-green);
+    background: rgba(0, 224, 116, 0.03);
+}
+
+.transmission-label {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: #ff4d4d;
+    color: #fff;
+    font-size: 0.6rem;
+    font-weight: 900;
+    padding: 2px 10px;
+    border-radius: 4px;
+    animation: flash 1s infinite alternate;
+}
+
+@keyframes flash {
+    from {
+        opacity: 0.5;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.testimonial-text {
+    font-style: italic;
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--primary-green);
+}
+
+.author-info span {
+    display: block;
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.8rem;
+}
+
+.author-info small {
+    color: var(--primary-green);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+}
+
+/* 4. PROJECT MODAL */
+.project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(15px);
+}
+
+.modal-container {
+    background: var(--bg-dark);
+    max-width: 1000px;
+    width: 100%;
+    max-height: 90vh;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    background: var(--primary-green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.3s;
+}
+
+.modal-image {
+    width: 100%;
+    max-height: 600px;
+    object-fit: contain;
+    background: #000;
+}
+
+.modal-info {
+    padding: 40px;
+}
+
+.modal-tag {
+    color: var(--primary-green);
+    font-weight: 900;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.modal-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.modal-desc {
+    color: var(--text-gray);
+    line-height: 1.8;
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+.modal-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 30px;
+}
+
+.meta-item label {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--text-gray);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.meta-item span {
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+/* Animations for Modal */
+.modal-show {
+    display: flex !important;
+    animation: fadeIn 0.4s forwards;
+}
+
+@media (max-width: 768px) {
+    .modal-info {
+        padding: 25px;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+    }
+}/* High-Tech Scanline Effect */ .path-step::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(transparent 50%, rgba(0, 224, 116, 0.02) 50%); background-size: 100% 4px; pointer-events: none; border-radius: 20px; } .path-step:hover h3 { color: var(--primary-green); text-shadow: 0 0 10px var(--primary-green); transform: translateX(5px); transition: all 0.3s; } @media (max-width: 768px) { .path-container::before { left: 45px; } }
